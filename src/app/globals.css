@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdf8f3;
-  --foreground: #1a1410;
-  --card: #ffffff;
-  --muted: #f5ede2;
-  --muted-foreground: #6b5f52;
-  --primary: #ff7a3d;
+  --background: #fbf7f0;
+  --foreground: #2b2420;
+  --card: #fffdf9;
+  --muted: #f4eadf;
+  --muted-foreground: #7b6d63;
+  --primary: #d96f4f;
   --primary-foreground: #ffffff;
-  --accent: #ffd166;
-  --border: #ece1d1;
-  --ring: #ff7a3d;
-  --success: #4ea674;
+  --accent: #e6ae7b;
+  --border: #eadfd3;
+  --ring: #c85e40;
+  --success: #76946a;
 }
 
 .dark {
@@ -40,8 +40,8 @@
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-success: var(--success);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 }
 
 * {
@@ -49,10 +49,90 @@
 }
 
 body {
-  background: var(--background);
+  background: #fbf7f0;
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #e6ae7b;
+  color: #2b2420;
+}
+
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  transition-duration: 180ms;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(201, 246, 91, 0.75);
+  outline-offset: 3px;
+}
+
+input::placeholder {
+  opacity: 1;
+}
+
+section {
+  scroll-margin-top: 2rem;
+}
+
+.kinvo-section-label {
+  color: #b85d43;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.kinvo-card {
+  border: 1px solid #eadfd3;
+  border-radius: 1.35rem;
+  background: #fffdf9;
+  box-shadow: 0 18px 50px rgba(104, 69, 47, 0.07);
+}
+
+.kinvo-card:hover {
+  border-color: #dfb897;
+  box-shadow: 0 20px 55px rgba(104, 69, 47, 0.12);
+  transform: translateY(-2px);
+}
+
+.kinvo-muted-card {
+  border: 1px solid #eadfd3;
+  border-radius: 1.35rem;
+  background: #f7ede2;
+}
+
+.kinvo-divider {
+  border-color: #eee2d6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
 }
 
 @keyframes float {
