@@ -90,7 +90,7 @@ export default function Home() {
           <form id="waitlist" onSubmit={handleSubmit} className="scroll-mt-32 mx-auto mt-9 flex max-w-xl flex-col gap-3 sm:flex-row">
             {submitted ? <div className="flex flex-1 items-center gap-3 rounded-full border border-[#c6d4b9] bg-[#edf3e7] px-5 py-4 text-sm font-semibold text-[#58704b]"><CircleCheck size={18} /> Jesteś na liście. Odezwiemy się wkrótce.</div> : <><input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Twój adres e-mail" aria-label="Twój adres e-mail" className="min-w-0 flex-1 rounded-full border border-[#e4d6ca] bg-[#fffdf9] px-5 py-4 text-sm text-[#2b2420] outline-none placeholder:text-[#a3948a] focus:border-[#d96f4f]" /><button disabled={isSubmitting} className="rounded-full bg-[#d96f4f] px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-[#c85e40] disabled:cursor-wait disabled:opacity-70">{isSubmitting ? "Zapisuję..." : "Zapisz się na listę"} <ArrowUpRight className="ml-1 inline" size={16} /></button></>}
           </form>
-          <p className="mt-4 text-xs text-[#896f61]">Wskocz do pierwszej edycji Kinvo — dla pierwszych osób dostęp za 0 zł.</p>
+          <p className="mt-4 text-xs text-[#896f61]">Dołącz do Kinvo przed innymi - dla pierwszych osób dostęp za 0 zł.</p>
           {submitError && <p role="alert" className="mt-2 text-xs font-semibold text-[#b6533d]">{submitError}</p>}
         </div>
         <div className="relative z-10 mx-auto mt-16 w-full max-w-[900px]">
@@ -194,5 +194,5 @@ function LogoMark({ size, dark = false }: { size: "sm" | "md"; dark?: boolean })
 }
 
 function WaitlistBar() {
-  return <div className="fixed inset-x-3 bottom-3 z-50 mx-auto flex max-w-xl items-center justify-between gap-4 rounded-full border border-[#eadfd3] bg-[#fffdf9]/95 px-4 py-3 text-[#2b2420] shadow-[0_12px_35px_rgba(104,69,47,.18)] backdrop-blur-md sm:inset-x-auto sm:bottom-5 sm:px-5"><div className="hidden items-center gap-2 text-xs sm:flex"><span className="h-2 w-2 rounded-full bg-[#d96f4f]" /> Wskocz do pierwszej edycji · 0 zł na start</div><span className="text-xs font-medium sm:hidden">Pierwsza edycja · 0 zł</span><a href="#waitlist" className="shrink-0 rounded-full bg-[#d96f4f] px-4 py-2 text-xs font-bold text-white hover:bg-[#c85e40]">Dołącz teraz <ArrowUpRight className="ml-1 inline" size={13} /></a></div>;
+  return <div className="fixed inset-x-3 bottom-3 z-50 mx-auto flex max-w-xl items-center justify-between gap-4 rounded-full border border-[#eadfd3] bg-[#fffdf9]/95 px-4 py-3 text-[#2b2420] shadow-[0_12px_35px_rgba(104,69,47,.18)] backdrop-blur-md sm:inset-x-auto sm:bottom-5 sm:px-5"><div className="hidden items-center gap-2 text-xs sm:flex"><span className="h-2 w-2 rounded-full bg-[#d96f4f]" /> Dołącz do Kinvo przed innymi - dostęp za 0 zł</div><span className="text-xs font-medium sm:hidden">Dołącz przed innymi · 0 zł</span><a href="#waitlist" className="shrink-0 rounded-full bg-[#d96f4f] px-4 py-2 text-xs font-bold text-white hover:bg-[#c85e40]">Dołącz teraz <ArrowUpRight className="ml-1 inline" size={13} /></a></div>;
 }
