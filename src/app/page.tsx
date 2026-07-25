@@ -71,12 +71,12 @@ export default function Home() {
           <a href="#jak-to-działa" className="text-[#7b6d63] transition-colors hover:text-[#2b2420]">Jak to działa</a>
         </div>
         <div className="hidden items-center gap-5 md:flex">
-          <a href="#waitlist" className="rounded-full bg-[#d96f4f] px-5 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#c85e40]">Dołącz do listy <ArrowUpRight className="ml-1 inline" size={15} /></a>
+          <a href="#waitlist" className="rounded-full bg-[#d96f4f] px-5 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#c85e40]">Dołącz teraz <ArrowUpRight className="ml-1 inline" size={15} /></a>
         </div>
         <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Otwórz menu">{menuOpen ? <X /> : <Menu />}</button>
         </div>
       </nav>
-      {menuOpen && <div className="absolute left-0 right-0 top-20 z-20 mx-4 rounded-2xl border border-[#eadfd3] bg-[#fffdf9] p-5 text-[#2b2420] shadow-xl md:hidden"><div className="flex flex-col gap-4 text-sm font-medium"><a href="#dla-twórców" onClick={() => setMenuOpen(false)}>Dla twórców</a><a href="#dla-marek" onClick={() => setMenuOpen(false)}>Dla marek</a><a href="#jak-to-działa" onClick={() => setMenuOpen(false)}>Jak to działa</a><a href="#waitlist" className="rounded-full bg-[#d96f4f] px-4 py-3 text-center text-white">Dołącz do listy</a></div></div>}
+      {menuOpen && <div className="absolute left-0 right-0 top-20 z-20 mx-4 rounded-2xl border border-[#eadfd3] bg-[#fffdf9] p-5 text-[#2b2420] shadow-xl md:hidden"><div className="flex flex-col gap-4 text-sm font-medium"><a href="#dla-twórców" onClick={() => setMenuOpen(false)}>Dla twórców</a><a href="#dla-marek" onClick={() => setMenuOpen(false)}>Dla marek</a><a href="#jak-to-działa" onClick={() => setMenuOpen(false)}>Jak to działa</a><a href="#waitlist" className="rounded-full bg-[#d96f4f] px-4 py-3 text-center text-white">Dołącz teraz</a></div></div>}
 
       <WaitlistBar />
 
