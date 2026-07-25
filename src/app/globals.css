@@ -120,6 +120,16 @@ section {
   border-color: #eee2d6;
 }
 
+/* Keep legacy utility accents aligned with the warm Kinvo palette. */
+[class~="text-[#8aaf34]"],
+[class~="text-[#89ad3a]"],
+[class~="text-[#6b9128]"],
+[class~="text-[#6c8c30]"],
+[class~="text-[#79a72d]"],
+[class~="text-[#719c31]"] {
+  color: #b85d43 !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
