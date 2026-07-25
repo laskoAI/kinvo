@@ -14,17 +14,40 @@ import {
   X,
   Zap,
 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [chatInput, setChatInput] = useState("");
   const [chatSent, setChatSent] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (email.trim()) setSubmitted(true);
+    setSubmitError("");
+
+    if (!supabase) {
+      setSubmitError("Formularz nie jest jeszcze skonfigurowany.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    const { error } = await supabase
+      .from("waitlist")
+      .insert({ email: email.trim().toLowerCase() });
+
+    if (error?.code === "23505") {
+      setSubmitted(true);
+    } else if (error) {
+      setSubmitError("Nie udało się zapisać adresu. Spróbuj ponownie.");
+    } else {
+      setSubmitted(true);
+    }
+
+    setIsSubmitting(false);
   }
 
   function handleChatSubmit(event: FormEvent<HTMLFormElement>) {
@@ -65,9 +88,10 @@ export default function Home() {
           <h1 className="mx-auto max-w-4xl text-[clamp(3.1rem,8vw,7rem)] font-semibold leading-[.92] tracking-[-0.075em]">Twórz lepsze<br /><span className="text-[#c85e40]">współprace.</span></h1>
           <p className="mx-auto mt-7 max-w-2xl text-base leading-7 text-[#725f54] sm:text-lg">Jedna platforma dla marek i twórców. Opisz kampanię, ustaw budżet i znajdź osoby, które naprawdę pasują.</p>
           <form id="waitlist" onSubmit={handleSubmit} className="scroll-mt-32 mx-auto mt-9 flex max-w-xl flex-col gap-3 sm:flex-row">
-            {submitted ? <div className="flex flex-1 items-center gap-3 rounded-full border border-[#c6d4b9] bg-[#edf3e7] px-5 py-4 text-sm font-semibold text-[#58704b]"><CircleCheck size={18} /> Jesteś na liście. Odezwiemy się wkrótce.</div> : <><input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Twój adres e-mail" aria-label="Twój adres e-mail" className="min-w-0 flex-1 rounded-full border border-[#e4d6ca] bg-[#fffdf9] px-5 py-4 text-sm text-[#2b2420] outline-none placeholder:text-[#a3948a] focus:border-[#d96f4f]" /><button className="rounded-full bg-[#d96f4f] px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-[#c85e40]">Zapisz się na listę <ArrowUpRight className="ml-1 inline" size={16} /></button></>}
+            {submitted ? <div className="flex flex-1 items-center gap-3 rounded-full border border-[#c6d4b9] bg-[#edf3e7] px-5 py-4 text-sm font-semibold text-[#58704b]"><CircleCheck size={18} /> Jesteś na liście. Odezwiemy się wkrótce.</div> : <><input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Twój adres e-mail" aria-label="Twój adres e-mail" className="min-w-0 flex-1 rounded-full border border-[#e4d6ca] bg-[#fffdf9] px-5 py-4 text-sm text-[#2b2420] outline-none placeholder:text-[#a3948a] focus:border-[#d96f4f]" /><button disabled={isSubmitting} className="rounded-full bg-[#d96f4f] px-6 py-4 text-sm font-bold text-white transition-colors hover:bg-[#c85e40] disabled:cursor-wait disabled:opacity-70">{isSubmitting ? "Zapisuję..." : "Zapisz się na listę"} <ArrowUpRight className="ml-1 inline" size={16} /></button></>}
           </form>
           <p className="mt-4 text-xs text-[#896f61]">Wskocz do pierwszej edycji Kinvo — dla pierwszych osób dostęp za 0 zł.</p>
+          {submitError && <p role="alert" className="mt-2 text-xs font-semibold text-[#b6533d]">{submitError}</p>}
         </div>
         <div className="relative z-10 mx-auto mt-16 w-full max-w-[900px]">
           <div className="absolute -right-10 top-8 h-40 w-40 rounded-full bg-[#dff5a7] blur-2xl" />
